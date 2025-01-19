@@ -1,0 +1,64 @@
+diff --git a/lib/linebuffer.c b/lib/linebuffer.c
+index 4124bbcb37..9c8e12ab32 100644
+--- a/lib/linebuffer.c
++++ b/lib/linebuffer.c
+@@ -31,6 +31,19 @@
+ # include "unlocked-io.h"
+ #endif
+ 
++/* END_OF_ARRAY(array,n) returns a pointer past the last element of the array
++   ARRAY that has N elements.
++   For clang, it uses a conditional expression that avoids adding 0 to a null
++   pointer, which is undefined according to ISO C 23 § 6.5.6.(9) and which
++   triggers an error in clang's undefined-behaviour sanitizer.  When no
++   sanitizer is in effect, clang optimizes this conditional expression to
++   exactly the same code.  */
++#if defined __clang__
++# define END_OF_ARRAY(array,n) ((n) ? (array) + (n) : (array))
++#else
++# define END_OF_ARRAY(array,n) ((array) + (n))
++#endif
++
+ /* Initialize linebuffer LINEBUFFER for use. */
+ 
+ void
+@@ -62,7 +75,7 @@ readlinebuffer_delim (struct linebuffer *linebuffer, FILE *stream,
+   int c;
+   char *buffer = linebuffer->buffer;
+   char *p = linebuffer->buffer;
+-  char *end = buffer + linebuffer->size; /* Sentinel. */
++  char *end = END_OF_ARRAY (buffer, linebuffer->size); /* Sentinel. */
+ 
+   if (feof (stream))
+     return NULL;
+diff --git a/lib/mpsort.c b/lib/mpsort.c
+index 32cc5e1f82..2741d7199d 100644
+--- a/lib/mpsort.c
++++ b/lib/mpsort.c
+@@ -23,6 +23,19 @@
+ 
+ #include <string.h>
+ 
++/* END_OF_ARRAY(array,n) returns a pointer past the last element of the array
++   ARRAY that has N elements.
++   For clang, it uses a conditional expression that avoids adding 0 to a null
++   pointer, which is undefined according to ISO C 23 § 6.5.6.(9) and which
++   triggers an error in clang's undefined-behaviour sanitizer.  When no
++   sanitizer is in effect, clang optimizes this conditional expression to
++   exactly the same code.  */
++#if defined __clang__
++# define END_OF_ARRAY(array,n) ((n) ? (array) + (n) : (array))
++#else
++# define END_OF_ARRAY(array,n) ((array) + (n))
++#endif
++
+ /* The type of qsort-style comparison functions.  */
+ 
+ typedef int (*comparison_function) (void const *, void const *);
+@@ -152,5 +165,5 @@ mpsort_with_tmp (void const **restrict base, size_t n,
+ void
+ mpsort (void const **base, size_t n, comparison_function cmp)
+ {
+-  mpsort_with_tmp (base, n, base + n, cmp);
++  mpsort_with_tmp (base, n, END_OF_ARRAY (base, n), cmp);
+ }
