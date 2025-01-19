@@ -37,9 +37,9 @@ cd build
 FORCE_UNSAFE_CONFIGURE=1 ../configure --config-cache $configure_options > log1 2>&1; rc=$?; cat log1; test $rc = 0 || exit 1
 
 # Build.
-$make > log2 2>&1; rc=$?; cat log2; test $rc = 0 || exit 1
+$make V=1 > log2 2>&1; rc=$?; cat log2; test $rc = 0 || exit 1
 
 # Run the tests.
-$make check > log3 2>&1; rc=$?; cat log3; test $rc = 0 || exit 1
+$make check V=1 > log3 2>&1; rc=$?; cat log3; test $rc = 0 || exit 1
 
 cd ..
