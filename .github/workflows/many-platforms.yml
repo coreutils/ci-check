@@ -1,6 +1,6 @@
 # A GitHub Actions workflow that builds a package on many platforms.
 
-# Copyright (C) 2024 Free Software Foundation, Inc.
+# Copyright (C) 2024-2025 Free Software Foundation, Inc.
 #
 # This file is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published
@@ -36,11 +36,11 @@ on:
   schedule:
     # Doc: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule
     # POSIX cron syntax: https://pubs.opengroup.org/onlinepubs/9699919799/utilities/crontab.html#tag_20_25_07
-    - cron: '53 4 * * 1'
+    - cron: '6 18 * * 1'
 
 # Variables.
 env:
-  package: xxxxxxxx
+  package: coreutils
 
 jobs:
   build-tarball:
