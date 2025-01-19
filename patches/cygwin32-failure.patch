@@ -1,0 +1,21 @@
+diff --git a/bootstrap.conf b/bootstrap.conf
+index a8ff2eef0..9533028df 100644
+--- a/bootstrap.conf
++++ b/bootstrap.conf
+@@ -22,6 +22,7 @@ avoided_gnulib_modules='
+   --avoid=dummy
+   --avoid=mbuiter
+   --avoid=mbuiterf
++  --avoid=year2038-tests
+ '
+ 
+ # gnulib modules used by this package.
+@@ -314,7 +315,7 @@ gnulib_modules="
+   xstrtold
+   xstrtoumax
+   xvasprintf
+-  year2038-recommended
++  year2038
+   yesno
+ "
+ 
