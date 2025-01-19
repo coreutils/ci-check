@@ -425,7 +425,7 @@ jobs:
             pwd
             : "Install OpenBSD packages"
             : "List of packages: https://cdn.openbsd.org/pub/OpenBSD/7.5/packages/amd64/"
-            : pkg_add ...
+            pkg_add texinfo-6.5p4
             ls -l
             export CPPFLAGS="-I/usr/local/include -Wall"
             export LDFLAGS="-L/usr/local/lib"
