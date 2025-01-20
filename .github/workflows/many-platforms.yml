@@ -103,7 +103,7 @@ jobs:
       - run: |
           pwd
           export CPPFLAGS="-Wall"
-          ./build-on.sh '${{ env.package }}' '' 'make'
+          ./build-on.sh '${{ env.package }}' '' 'make' 'sudo apt update; sudo apt install libacl1-dev libattr1-dev libgmp-dev libcap-dev libsystemd-dev libssl-dev && sudo localedef -i ar_SA -f ISO-8859-6 ar_SA.ISO-8859-6 && sudo localedef -i de_DE -f UTF-8 de_DE.UTF-8 && sudo localedef -i es_ES -f UTF-8 es_ES.UTF-8 && sudo localedef -i fa_IR -f UTF-8 fa_IR && sudo localedef -i fr_FR -f ISO-8859-1 fr_FR.ISO-8859-1 && sudo localedef -i fr_FR -f UTF-8 fr_FR.UTF-8 && sudo localedef -i ja_JP -f EUC-JP ja_JP.EUC-JP && sudo localedef -i tr_TR -f UTF-8 tr_TR.UTF-8 && sudo localedef -i zh_CN -f GB18030 zh_CN.GB18030 && sudo localedef -i zh_HK -f BIG5-HKSCS zh_HK.BIG5-HKSCS'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -117,6 +117,12 @@ jobs:
             ${{ env.package }}-*/build/log[123]
             ${{ env.package }}-*/build/tests/test-suite.log
             ${{ env.package }}-*/build/gnulib-tests/test-suite.log
+            ${{ env.package }}-*/build-full/config.cache
+            ${{ env.package }}-*/build-full/config.log
+            ${{ env.package }}-*/build-full/config.status
+            ${{ env.package }}-*/build-full/log[123]
+            ${{ env.package }}-*/build-full/tests/test-suite.log
+            ${{ env.package }}-*/build-full/gnulib-tests/test-suite.log
           retention-days: 7
           overwrite: true
   check-linux-gnu-centos:
@@ -148,7 +154,7 @@ jobs:
             cd /work
             ls -l
             export CPPFLAGS="-Wall"
-            ./build-on.sh '${{ env.package }}' '' 'make'
+            ./build-on.sh '${{ env.package }}' '' 'make' 'yum -y install libacl-devel libattr-devel gmp-devel libcap-devel systemd-devel openssl-devel glibc-common && localedef -i ar_SA -f ISO-8859-6 ar_SA.ISO-8859-6 && localedef -i de_DE -f UTF-8 de_DE.UTF-8 && localedef -i es_ES -f UTF-8 es_ES.UTF-8 && localedef -i fa_IR -f UTF-8 fa_IR && localedef -i fr_FR -f ISO-8859-1 fr_FR.ISO-8859-1 && localedef -i fr_FR -f UTF-8 fr_FR.UTF-8 && localedef -i ja_JP -f EUC-JP ja_JP.EUC-JP && localedef -i tr_TR -f UTF-8 tr_TR.UTF-8 && localedef -i zh_CN -f GB18030 zh_CN.GB18030 && localedef -i zh_HK -f BIG5-HKSCS zh_HK.BIG5-HKSCS'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -162,6 +168,12 @@ jobs:
             ${{ env.package }}-*/build/log[123]
             ${{ env.package }}-*/build/tests/test-suite.log
             ${{ env.package }}-*/build/gnulib-tests/test-suite.log
+            ${{ env.package }}-*/build-full/config.cache
+            ${{ env.package }}-*/build-full/config.log
+            ${{ env.package }}-*/build-full/config.status
+            ${{ env.package }}-*/build-full/log[123]
+            ${{ env.package }}-*/build-full/tests/test-suite.log
+            ${{ env.package }}-*/build-full/gnulib-tests/test-suite.log
           retention-days: 7
           overwrite: true
   check-linux-gnu-alma:
@@ -195,7 +207,7 @@ jobs:
             cd /work
             ls -l
             export CPPFLAGS="-Wall"
-            ./build-on.sh '${{ env.package }}' '' 'make'
+            ./build-on.sh '${{ env.package }}' '' 'make' 'yum -y install libacl-devel libattr-devel gmp-devel libcap-devel systemd-devel openssl-devel glibc-locale-source && localedef -i en_US -f UTF-8 en_US.UTF-8 && localedef -i ar_SA -f ISO-8859-6 ar_SA.ISO-8859-6 && localedef -i de_DE -f UTF-8 de_DE.UTF-8 && localedef -i es_ES -f UTF-8 es_ES.UTF-8 && localedef -i fa_IR -f UTF-8 fa_IR && localedef -i fr_FR -f ISO-8859-1 fr_FR.ISO-8859-1 && localedef -i fr_FR -f UTF-8 fr_FR.UTF-8 && localedef -i ja_JP -f EUC-JP ja_JP.EUC-JP && localedef -i tr_TR -f UTF-8 tr_TR.UTF-8 && localedef -i zh_CN -f GB18030 zh_CN.GB18030 && localedef -i zh_HK -f BIG5-HKSCS zh_HK.BIG5-HKSCS'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -209,6 +221,12 @@ jobs:
             ${{ env.package }}-*/build/log[123]
             ${{ env.package }}-*/build/tests/test-suite.log
             ${{ env.package }}-*/build/gnulib-tests/test-suite.log
+            ${{ env.package }}-*/build-full/config.cache
+            ${{ env.package }}-*/build-full/config.log
+            ${{ env.package }}-*/build-full/config.status
+            ${{ env.package }}-*/build-full/log[123]
+            ${{ env.package }}-*/build-full/tests/test-suite.log
+            ${{ env.package }}-*/build-full/gnulib-tests/test-suite.log
           retention-days: 7
           overwrite: true
   check-linux-alpine:
@@ -238,7 +256,7 @@ jobs:
             cd /work
             ls -l
             export CPPFLAGS="-Wall"
-            ./build-on.sh '${{ env.package }}' '' 'make'
+            ./build-on.sh '${{ env.package }}' '' 'make' 'apk add musl-libintl libacl libattr gmp libcap openssl musl-locales'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -252,6 +270,12 @@ jobs:
             ${{ env.package }}-*/build/log[123]
             ${{ env.package }}-*/build/tests/test-suite.log
             ${{ env.package }}-*/build/gnulib-tests/test-suite.log
+            ${{ env.package }}-*/build-full/config.cache
+            ${{ env.package }}-*/build-full/config.log
+            ${{ env.package }}-*/build-full/config.status
+            ${{ env.package }}-*/build-full/log[123]
+            ${{ env.package }}-*/build-full/tests/test-suite.log
+            ${{ env.package }}-*/build-full/gnulib-tests/test-suite.log
           retention-days: 7
           overwrite: true
   check-macos:
@@ -280,8 +304,9 @@ jobs:
       # - run: brew install ...
       - run: |
           pwd
-          export CPPFLAGS="-Wall"
-          ./build-on.sh '${{ env.package }}' '' 'make'
+          export CPPFLAGS="-I$HOME/include -I${HOMEBREW_PREFIX-/usr/local}/opt/gettext/include -I${HOMEBREW_PREFIX-/usr/local}/opt/libiconv/include -Wall"
+          export LDFLAGS="-L$HOME/lib -L${HOMEBREW_PREFIX-/usr/local}/opt/gettext/lib -L${HOMEBREW_PREFIX-/usr/local}/opt/libiconv/lib"
+          ./build-on.sh '${{ env.package }}' '' 'make' ${{ (matrix.os == 'macos-14' || matrix.os == 'macos-15') && 'brew install gettext gmp openssl@3' || 'brew install gmp openssl@3' }}
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -295,6 +320,12 @@ jobs:
             ${{ env.package }}-*/build/log[123]
             ${{ env.package }}-*/build/tests/test-suite.log
             ${{ env.package }}-*/build/gnulib-tests/test-suite.log
+            ${{ env.package }}-*/build-full/config.cache
+            ${{ env.package }}-*/build-full/config.log
+            ${{ env.package }}-*/build-full/config.status
+            ${{ env.package }}-*/build-full/log[123]
+            ${{ env.package }}-*/build-full/tests/test-suite.log
+            ${{ env.package }}-*/build-full/gnulib-tests/test-suite.log
           retention-days: 7
           overwrite: true
   check-freebsd:
@@ -329,7 +360,7 @@ jobs:
             ls -l
             export CPPFLAGS="-I/usr/local/include -Wall"
             export LDFLAGS="-L/usr/local/lib"
-            ./build-on.sh '${{ env.package }}' '' 'make'
+            ./build-on.sh '${{ env.package }}' '' 'make' 'pkg install -y gmp openssl'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -343,6 +374,12 @@ jobs:
             ${{ env.package }}-*/build/log[123]
             ${{ env.package }}-*/build/tests/test-suite.log
             ${{ env.package }}-*/build/gnulib-tests/test-suite.log
+            ${{ env.package }}-*/build-full/config.cache
+            ${{ env.package }}-*/build-full/config.log
+            ${{ env.package }}-*/build-full/config.status
+            ${{ env.package }}-*/build-full/log[123]
+            ${{ env.package }}-*/build-full/tests/test-suite.log
+            ${{ env.package }}-*/build-full/gnulib-tests/test-suite.log
           retention-days: 7
           overwrite: true
   check-netbsd:
@@ -378,7 +415,7 @@ jobs:
             ls -l
             export CPPFLAGS="-I/usr/pkg/include -Wall"
             export LDFLAGS="-L/usr/pkg/lib"
-            ./build-on.sh '${{ env.package }}' '' 'make'
+            ./build-on.sh '${{ env.package }}' '' 'make' '/usr/sbin/pkg_add gettext-lib gmp openssl'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -392,6 +429,12 @@ jobs:
             ${{ env.package }}-*/build/log[123]
             ${{ env.package }}-*/build/tests/test-suite.log
             ${{ env.package }}-*/build/gnulib-tests/test-suite.log
+            ${{ env.package }}-*/build-full/config.cache
+            ${{ env.package }}-*/build-full/config.log
+            ${{ env.package }}-*/build-full/config.status
+            ${{ env.package }}-*/build-full/log[123]
+            ${{ env.package }}-*/build-full/tests/test-suite.log
+            ${{ env.package }}-*/build-full/gnulib-tests/test-suite.log
           retention-days: 7
           overwrite: true
   check-openbsd:
@@ -430,7 +473,7 @@ jobs:
             ls -l
             export CPPFLAGS="-I/usr/local/include -Wall"
             export LDFLAGS="-L/usr/local/lib"
-            ./build-on.sh '${{ env.package }}' '' 'gmake'
+            ./build-on.sh '${{ env.package }}' '' 'gmake' 'pkg_add gmp openssl-3.2.1p1v0'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -444,6 +487,12 @@ jobs:
             ${{ env.package }}-*/build/log[123]
             ${{ env.package }}-*/build/tests/test-suite.log
             ${{ env.package }}-*/build/gnulib-tests/test-suite.log
+            ${{ env.package }}-*/build-full/config.cache
+            ${{ env.package }}-*/build-full/config.log
+            ${{ env.package }}-*/build-full/config.status
+            ${{ env.package }}-*/build-full/log[123]
+            ${{ env.package }}-*/build-full/tests/test-suite.log
+            ${{ env.package }}-*/build-full/gnulib-tests/test-suite.log
           retention-days: 7
           overwrite: true
   check-solaris11:
@@ -477,9 +526,12 @@ jobs:
             env | LC_ALL=C sort
             pwd
             ls -l
+            : "The locale set by default, C.UTF-8, is not a valid locale on Solaris 11."
+            : "This causes a failure of the test-update-copyright.sh test."
+            export LANG=en_US.UTF-8
             export CPPFLAGS="-Wall"
             export CC="gcc -m64"
-            ./build-on.sh '${{ env.package }}' '' 'make'
+            ./build-on.sh '${{ env.package }}' '' 'make' 'pkg install library/gmp library/security/openssl-3 system/locale'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -493,6 +545,12 @@ jobs:
             ${{ env.package }}-*/build/log[123]
             ${{ env.package }}-*/build/tests/test-suite.log
             ${{ env.package }}-*/build/gnulib-tests/test-suite.log
+            ${{ env.package }}-*/build-full/config.cache
+            ${{ env.package }}-*/build-full/config.log
+            ${{ env.package }}-*/build-full/config.status
+            ${{ env.package }}-*/build-full/log[123]
+            ${{ env.package }}-*/build-full/tests/test-suite.log
+            ${{ env.package }}-*/build-full/gnulib-tests/test-suite.log
           retention-days: 7
           overwrite: true
   check-solaris11-omnios:
@@ -528,7 +586,7 @@ jobs:
             pwd
             ls -l
             export CPPFLAGS="-Wall"
-            ./build-on.sh '${{ env.package }}' '' 'gmake'
+            ./build-on.sh '${{ env.package }}' '' 'gmake' 'pkg install library/gmp library/security/openssl-3 locale/de locale/es locale/fr locale/tr'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -542,6 +600,12 @@ jobs:
             ${{ env.package }}-*/build/log[123]
             ${{ env.package }}-*/build/tests/test-suite.log
             ${{ env.package }}-*/build/gnulib-tests/test-suite.log
+            ${{ env.package }}-*/build-full/config.cache
+            ${{ env.package }}-*/build-full/config.log
+            ${{ env.package }}-*/build-full/config.status
+            ${{ env.package }}-*/build-full/log[123]
+            ${{ env.package }}-*/build-full/tests/test-suite.log
+            ${{ env.package }}-*/build-full/gnulib-tests/test-suite.log
           retention-days: 7
           overwrite: true
   check-cygwin:
@@ -574,7 +638,7 @@ jobs:
           platform: ${{ matrix.bitness == 32 && 'x86' || 'x86_64' }}
           # Install Cygwin packages.
           # List of packages: https://cygwin.com/packages/package_list.html
-          packages: gcc-core make perl
+          packages: gcc-core make perl libgmp-devel libssl-devel
       - name: cygcheck
         run: cygcheck -V
       - name: cygcheck
@@ -591,7 +655,7 @@ jobs:
       - name: Build in Cygwin
         run: |
           export CPPFLAGS="-Wall"
-          ./build-on.sh '${{ env.package }}' '' 'make'
+          ./build-on.sh '${{ env.package }}' '' 'make' ''
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -639,7 +703,7 @@ jobs:
           platform: x86_64
           # Install Cygwin packages.
           # List of packages: https://cygwin.com/packages/package_list.html
-          packages: ${{ matrix.bitness == 32 && 'mingw64-i686-gcc-core mingw64-i686-headers mingw64-i686-runtime' || 'mingw64-x86_64-gcc-core mingw64-x86_64-headers mingw64-x86_64-runtime' }} make
+          packages: ${{ matrix.bitness == 32 && 'mingw64-i686-gcc-core mingw64-i686-headers mingw64-i686-runtime mingw64-i686-gmp' || 'mingw64-x86_64-gcc-core mingw64-x86_64-headers mingw64-x86_64-runtime mingw64-x86_64-gmp' }} make
       - name: cygcheck
         run: cygcheck -V
       - name: cygcheck
@@ -659,7 +723,7 @@ jobs:
           PATH=/usr/${{ matrix.bitness == 32 && 'i686' || 'x86_64' }}-w64-mingw32/sys-root/mingw/bin:$PATH
           export CPPFLAGS="-Wall"
           export CC=${{ matrix.bitness == 32 && 'i686' || 'x86_64' }}-w64-mingw32-gcc
-          ./build-on.sh '${{ env.package }}' '--host=${{ matrix.bitness == 32 && 'i686' || 'x86_64' }}-w64-mingw32' 'make'
+          ./build-on.sh '${{ env.package }}' '--host=${{ matrix.bitness == 32 && 'i686' || 'x86_64' }}-w64-mingw32' 'make' ''
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -762,7 +826,7 @@ jobs:
           export STRIP=":"
           export AR="`pwd`/ar-lib lib"
           export RANLIB=":"
-          ./build-on.sh '${{ env.package }}' '--host=${{ matrix.bitness == 32 && 'i686' || 'x86_64' }}-w64-mingw32' 'make'
+          ./build-on.sh '${{ env.package }}' '--host=${{ matrix.bitness == 32 && 'i686' || 'x86_64' }}-w64-mingw32' 'make' ''
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -804,7 +868,7 @@ jobs:
           export CC="clang -fsanitize=address,undefined,signed-integer-overflow,shift,integer-divide-by-zero"
           export CFLAGS="-O0 -fno-omit-frame-pointer -ggdb"
           export ASAN_OPTIONS="detect_leaks=0 abort_on_error=1 allocator_may_return_null=1"
-          ./build-on.sh '${{ env.package }}' '' 'make'
+          ./build-on.sh '${{ env.package }}' '' 'make' ''
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -850,7 +914,7 @@ jobs:
             ls -l
             export CPPFLAGS="-Wall"
             export CC=clang
-            ./build-on.sh '${{ env.package }}' '' 'make'
+            ./build-on.sh '${{ env.package }}' '' 'make' 'apt update; apt -y install libacl1-dev libattr1-dev libgmp-dev libcap-dev libsystemd-dev libssl-dev locales && localedef -i en_US -f UTF-8 en_US.UTF-8 && localedef -i ar_SA -f ISO-8859-6 ar_SA.ISO-8859-6 && localedef -i de_DE -f UTF-8 de_DE.UTF-8 && localedef -i es_ES -f UTF-8 es_ES.UTF-8 && localedef -i fa_IR -f UTF-8 fa_IR && localedef -i fr_FR -f ISO-8859-1 fr_FR.ISO-8859-1 && localedef -i fr_FR -f UTF-8 fr_FR.UTF-8 && localedef -i ja_JP -f EUC-JP ja_JP.EUC-JP && localedef -i tr_TR -f UTF-8 tr_TR.UTF-8 && localedef -i zh_CN -f GB18030 zh_CN.GB18030 && localedef -i zh_HK -f BIG5-HKSCS zh_HK.BIG5-HKSCS'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -864,5 +928,11 @@ jobs:
             ${{ env.package }}-*/build/log[123]
             ${{ env.package }}-*/build/tests/test-suite.log
             ${{ env.package }}-*/build/gnulib-tests/test-suite.log
+            ${{ env.package }}-*/build-full/config.cache
+            ${{ env.package }}-*/build-full/config.log
+            ${{ env.package }}-*/build-full/config.status
+            ${{ env.package }}-*/build-full/log[123]
+            ${{ env.package }}-*/build-full/tests/test-suite.log
+            ${{ env.package }}-*/build-full/gnulib-tests/test-suite.log
           retention-days: 7
           overwrite: true
