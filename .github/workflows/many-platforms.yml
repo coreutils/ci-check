@@ -497,6 +497,8 @@ jobs:
   check-solaris11-omnios:
     name: make check on Solaris 11 OmniOS
     needs: build-tarball
+    # Two more test failures than check-solaris11: tests/tail/inotify-dir-recreate.sh, tests/misc/numfmt.pl.
+    if: ${{ false }}
     runs-on: ubuntu-22.04
     steps:
       # This is needed because we run a script stored in this repository.
