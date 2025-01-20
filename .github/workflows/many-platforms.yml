@@ -414,7 +414,7 @@ jobs:
             : pkgin install ...
             ls -l
             export CPPFLAGS="-I/usr/pkg/include -Wall"
-            export LDFLAGS="-L/usr/pkg/lib"
+            export LDFLAGS="-L/usr/pkg/lib -Wl,-rpath,/usr/pkg/lib"
             ./build-on.sh '${{ env.package }}' '' 'make' '/usr/sbin/pkg_add gettext-lib gmp openssl'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
