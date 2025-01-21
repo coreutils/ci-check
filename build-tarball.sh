@@ -40,6 +40,7 @@ git clone --depth 1 "$gnulib_url"
 # Apply patches.
 (cd "$package" && patch -p1 < ../patches/cygwin32-failure.patch)
 (cd "$package" && patch -p1 < ../patches/expected-failures.patch)
+(cd "$package" && patch -p1 < ../patches/revert-75606-fix.diff) # temporary
 (cd coreutils && rm -f gl/modules/link-tests.diff && sed -i -e '/link-tests.diff/d' gl/local.mk)
 (cd coreutils && rm -f gl/modules/rename-tests.diff && sed -i -e '/rename-tests.diff/d' gl/local.mk)
 (cd gnulib && patch -p1 < ../patches/ubsan.diff)
