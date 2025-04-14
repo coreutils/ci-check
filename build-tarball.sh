@@ -27,15 +27,13 @@ set -e
 if false; then
   # Upstream repositories.
   coreutils_url='https://git.savannah.gnu.org/git/coreutils.git'
-  gnulib_url='https://git.savannah.gnu.org/git/gnulib.git'
 else
   # Use the github mirror, to save savannah bandwidth.
   coreutils_url='https://github.com/coreutils/coreutils.git'
-  gnulib_url='https://github.com/coreutils/gnulib.git'
 fi
 # No '--depth 1' here, to avoid an error "unknown revision" during gen-ChangeLog.
-git clone "$coreutils_url"
-git clone --depth 1 "$gnulib_url"
+git clone "${coreutils_url}"
+git clone --depth 1 "${gnulib_url}"
 
 # Apply patches.
 (cd "$package" && patch -p1 < ../patches/cygwin32-failure.patch)
