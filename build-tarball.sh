@@ -26,7 +26,7 @@ set -e
 # Fetch sources (uses package 'git').
 if false; then
   # Upstream repositories.
-  coreutils_url='https://https.git.savannah.gnu.org/git/coreutils.git'
+  coreutils_url='https://git.savannah.gnu.org/git/coreutils.git'
 else
   # Use the github mirror, to save savannah bandwidth.
   coreutils_url='https://github.com/coreutils/coreutils.git'
