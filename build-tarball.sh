@@ -23,17 +23,14 @@ package="$1"
 
 set -e
 
+. ./init-git.sh
+# Use the github mirror, to save savannah bandwidth.
+git config set --global --append url.https://github.com/coreutils/coreutils.git.insteadOf https://git.savannah.gnu.org/git/coreutils.git
+
 # Fetch sources (uses package 'git').
-if false; then
-  # Upstream repositories.
-  coreutils_url='https://git.savannah.gnu.org/git/coreutils.git'
-else
-  # Use the github mirror, to save savannah bandwidth.
-  coreutils_url='https://github.com/coreutils/coreutils.git'
-fi
 # No '--depth 1' here, to avoid an error "unknown revision" during gen-ChangeLog.
-git clone "${coreutils_url}"
-git clone --depth 1 "${gnulib_url}"
+git clone https://git.savannah.gnu.org/git/"$package".git
+git clone --depth 1 https://git.savannah.gnu.org/git/gnulib.git
 
 # Apply patches.
 (cd "$package" && patch -p1 < ../patches/cygwin32-failure.patch)
