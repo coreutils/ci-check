@@ -48,6 +48,7 @@ $make V=1 > log2 2>&1; rc=$?; cat log2; test $rc = 0 || exit 1
 
 if ! $cross_compiling; then
   # Run the tests.
+  DEBUG=1 VERBOSE=1 \
   $make check V=1 > log3 2>&1; rc=$?; cat log3; test $rc = 0 || exit 1
 fi
 
@@ -69,6 +70,7 @@ if test -n "$install_optional_dependencies_command"; then
 
   if ! $cross_compiling; then
     # Run the tests.
+    DEBUG=1 VERBOSE=1 \
     $make check V=1 > log3 2>&1; rc=$?; cat log3; test $rc = 0 || exit 1
   fi
 
