@@ -23,14 +23,14 @@ index 4124bbcb37..9c8e12ab32 100644
  
  void
 @@ -62,7 +75,7 @@ readlinebuffer_delim (struct linebuffer *linebuffer, FILE *stream,
-   int c;
+
    char *buffer = linebuffer->buffer;
    char *p = linebuffer->buffer;
 -  char *end = buffer + linebuffer->size; /* Sentinel. */
 +  char *end = END_OF_ARRAY (buffer, linebuffer->size); /* Sentinel. */
- 
-   if (feof (stream))
-     return NULL;
+   int c;
+
+   do
 diff --git a/lib/mpsort.c b/lib/mpsort.c
 index 32cc5e1f82..2741d7199d 100644
 --- a/lib/mpsort.c
