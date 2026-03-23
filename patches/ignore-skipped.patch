@@ -1,0 +1,14 @@
+diff --git a/tests/local.mk b/tests/local.mk
+index b459ccc75..6d6e07c7f 100644
+--- a/tests/local.mk
++++ b/tests/local.mk
+@@ -85,6 +85,9 @@ TESTS_ENVIRONMENT =				\
+   PATH='$(abs_top_builddir)/src$(PATH_SEPARATOR)'"$$PATH" \
+   ; 9>&2
+ 
++# Omit logs of skipped tests from test-suite.log, if Automake ≥ 1.17 is used.
++IGNORE_SKIPPED_LOGS = 1
++
+ # On failure, display the global testsuite log on stdout.
+ VERBOSE = yes
+ 
