@@ -911,7 +911,7 @@ jobs:
       - uses: maus007/docker-run-action-fork@v1
         with:
           # A Docker container with the newest clang release, based on Debian 13.
-          image: tuxmake/clang-21:latest
+          image: tuxmake/clang-22:latest
           options: -v ${{ github.workspace }}:/work
           run: |
             uname -a
