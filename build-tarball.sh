@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Copyright (C) 2024-2025 Free Software Foundation, Inc.
+# Copyright (C) 2024-2026 Free Software Foundation, Inc.
 #
 # This file is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published
@@ -39,7 +39,6 @@ git clone --depth 1 https://git.savannah.gnu.org/git/gnulib.git
 (cd "$package" && patch -p1 < ../patches/ignore-skipped.patch)
 (cd coreutils && rm -f gl/modules/link-tests.diff && sed -i -e '/link-tests.diff/d' gl/local.mk)
 (cd coreutils && rm -f gl/modules/rename-tests.diff && sed -i -e '/rename-tests.diff/d' gl/local.mk)
-(cd gnulib && patch -p1 < ../patches/ubsan.diff)
 
 export GNULIB_SRCDIR=`pwd`/gnulib
 cd "$package"
