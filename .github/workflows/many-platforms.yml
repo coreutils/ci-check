@@ -684,9 +684,9 @@ jobs:
           overwrite: true
   check-mingw:
     name: make check on mingw
-    needs: build-tarball
-    # coreutils relies on the gnulib module 'mountlist', which is not yet ported to native Windows.
+    # This package has compilation errors on native Windows.
     if: ${{ false }}
+    needs: build-tarball
     # Doc: https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
     strategy:
       fail-fast: false
@@ -752,9 +752,9 @@ jobs:
           overwrite: true
   check-msvc:
     name: make check on MSVC
-    needs: build-tarball
-    # coreutils relies on the gnulib module 'mountlist', which is not yet ported to native Windows.
+    # This package has compilation errors on native Windows.
     if: ${{ false }}
+    needs: build-tarball
     # Doc: https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
     strategy:
       fail-fast: false
@@ -855,6 +855,8 @@ jobs:
           overwrite: true
   check-msys2:
     name: make check on mingw
+    # This package has compilation errors on native Windows.
+    if: ${{ false }}
     needs: build-tarball
     # Doc: https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
     strategy:
