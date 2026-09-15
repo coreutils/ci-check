@@ -354,7 +354,7 @@ jobs:
       # Doc: https://github.com/vmactions/freebsd-vm
       - uses: vmactions/freebsd-vm@v1
         with:
-          release: '14.0'
+          release: '15.1'
           mem: 1024
           usesh: true
           run: |
@@ -406,7 +406,7 @@ jobs:
       # Doc: https://github.com/vmactions/netbsd-vm
       - uses: vmactions/netbsd-vm@v1
         with:
-          release: '10.0'
+          release: '11.0'
           mem: 1024
           usesh: true
           run: |
@@ -461,7 +461,7 @@ jobs:
       # Doc: https://github.com/vmactions/openbsd-vm
       - uses: vmactions/openbsd-vm@v1
         with:
-          release: '7.7'
+          release: '7.9'
           mem: 1024
           usesh: true
           # Avoid 'sync: sshfs' since it causes trouble with file timestamps
@@ -476,13 +476,13 @@ jobs:
             env | LC_ALL=C sort
             pwd
             : "Install OpenBSD packages"
-            : "List of packages: https://cdn.openbsd.org/pub/OpenBSD/7.6/packages/amd64/"
+            : "List of packages: https://cdn.openbsd.org/pub/OpenBSD/7.9/packages/amd64/"
             pkg_add gmake
             export PATH=/usr/local/bin:$PATH
             ls -l
             export CPPFLAGS="-I/usr/local/include -Wall"
             export LDFLAGS="-L/usr/local/lib"
-            ./build-on.sh '${{ env.package }}' '' 'gmake' 'pkg_add gmp openssl-3.2.1p1v0'
+            ./build-on.sh '${{ env.package }}' '' 'gmake' 'pkg_add gmp openssl-3.5.6v0'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
