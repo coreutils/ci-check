@@ -56,3 +56,7 @@ make > log2 2>&1; rc=$?; cat log2; test $rc = 0 || exit 1
 make check > log3 2>&1; rc=$?; cat log3; test $rc = 0 || exit 1
 # Check that tarballs are correct.
 make distcheck > log4 2>&1; rc=$?; cat log4; test $rc = 0 || exit 1
+
+# We need a tarball in .gz format, but coreutils produces only .xz and .zst.
+xz -d coreutils-*.tar.xz || exit 1
+gzip -9 coreutils-*.tar || exit 1
