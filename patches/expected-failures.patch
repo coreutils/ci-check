@@ -14,7 +14,7 @@ diff --git a/tests/local.mk b/tests/local.mk
 index 12e30b449..7504b3a14 100644
 --- a/tests/local.mk
 +++ b/tests/local.mk
-@@ -751,6 +751,20 @@ all_tests =					\
+@@ -751,6 +751,19 @@ all_tests =					\
    tests/touch/trailing-slash.sh			\
    $(all_root_tests)
  
@@ -24,8 +24,7 @@ index 12e30b449..7504b3a14 100644
 +  tests/rm/interactive-once.sh \
 +  tests/shuf/shuf.sh \
 +  tests/misc/sync.sh \
-+  tests/tail/wait.sh \
-+  tests/tail/pipe-f2.sh
++  tests/tail/wait.sh
 +endif
 +if OS_IS_SOLARIS11
 +XFAIL_TESTS += \
